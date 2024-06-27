@@ -1,0 +1,32 @@
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>{{ companyName }}</h3>
+      <p>Connecting investors and entrepreneurs to build a better future.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li *ngFor="let link of footerLinks">
+          <a [routerLink]="link.url">{{ link.label }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-section" *ngIf="showNewsletter">
+      <h3>Stay Updated</h3>
+      <p>Subscribe to our newsletter for the latest investment opportunities.</p>
+      <div class="p-inputgroup">
+        <input type="text" pInputText placeholder="Your email" #emailInput>
+        <button type="button" pButton icon="pi pi-send" (click)="subscribeToNewsletter(emailInput.value)"></button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {{ currentYear }} {{ companyName }}. All rights reserved.</p>
+    <div class="social-links">
+      <a *ngFor="let social of socialLinks" [href]="social.url" target="_blank" rel="noopener noreferrer">
+        <i [class]="social.icon"></i>
+      </a>
+    </div>
+  </div>
+</footer>
