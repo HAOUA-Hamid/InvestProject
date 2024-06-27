@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../header/header.component';
 
 interface Project {
   id: number;
@@ -20,7 +21,7 @@ interface Project {
 @Component({
   selector: 'app-investment-projects',
   standalone: true,
-  imports: [CommonModule, TableModule, ButtonModule, TagModule, RatingModule, FormsModule],
+  imports: [CommonModule, TableModule, ButtonModule, TagModule, RatingModule, FormsModule,HeaderComponent],
   templateUrl: './investment-projects.component.html',
   styleUrls: ['./investment-projects.component.scss']
 })

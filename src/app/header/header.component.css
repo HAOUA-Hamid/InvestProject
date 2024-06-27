@@ -1,0 +1,34 @@
+header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-right: 2rem;
+}
+
+:host ::ng-deep {
+  .p-menubar {
+    background: none;
+    border: none;
+    padding: 0;
+
+    .p-menuitem-link {
+      padding: 0.5rem 1rem;
+
+      &:hover {
+        background-color: #e9ecef;
+      }
+    }
+
+    .p-menuitem-icon {
+      margin-right: 0.5rem;
+    }
+  }
+}
