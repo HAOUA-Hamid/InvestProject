@@ -1,15 +1,17 @@
 <div class="card">
   <h1>User Management</h1>
-  <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="10" selectionMode="single" [(selection)]="user" (onRowSelect)="onRowSelect($event)">
+  <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="10">
     <ng-template pTemplate="header">
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user>
-      <tr [pSelectableRow]="user">
+      <tr>
+        <td>{{user.id}}</td>
         <td>{{user.name}}</td>
         <td>{{user.email}}</td>
         <td>{{user.role | titlecase}}</td>
@@ -17,26 +19,25 @@
     </ng-template>
   </p-table>
 
-  <p-dialog header="User Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
-    <div class="p-grid p-fluid" *ngIf="user">
+  <a routerLink="/signup">Don't have an account? Sign up</a>
+
+  <p-dialog header="Add New User" [(visible)]="displayAddDialog" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+    <div class="p-fluid">
       <div class="p-field">
         <label for="name">Name</label>
-        <input id="name" pInputText type="text" [(ngModel)]="user.name" />
+        <input id="name" type="text" pInputText [(ngModel)]="newUser.name" required>
       </div>
       <div class="p-field">
         <label for="email">Email</label>
-        <input id="email" pInputText type="text" [(ngModel)]="user.email" />
+        <input id="email" type="email" pInputText [(ngModel)]="newUser.email" required>
       </div>
       <div class="p-field">
         <label for="role">Role</label>
-        <p-dropdown id="role" [options]="roles" [(ngModel)]="user.role" optionLabel="name" optionValue="value"></p-dropdown>
+        <p-dropdown id="role" [options]="roles" [(ngModel)]="newUser.role" optionLabel="name" optionValue="value" placeholder="Select a role"></p-dropdown>
       </div>
     </div>
     <ng-template pTemplate="footer">
-      <button pButton type="button" (click)="save()" label="Save"></button>
-      <button pButton type="button" (click)="delete()" label="Delete" class="p-button-danger" [disabled]="newUser"></button>
+      <button pButton type="button" (click)="addUser()" label="Add User"></button>
     </ng-template>
   </p-dialog>
-
-  <button pButton type="button" (click)="showDialogToAdd()" label="Add New User" style="margin-top: 1rem;"></button>
 </div>

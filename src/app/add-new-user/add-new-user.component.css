@@ -1,0 +1,27 @@
+:host ::ng-deep {
+  .p-card {
+    max-width: 400px;
+    margin: auto;
+  }
+  :host ::ng-deep .p-dialog .p-dialog-content {
+    padding: 2rem;
+  }
+
+  .p-field {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  .p-inputtext, .p-dropdown {
+    width: 100%;
+  }
+
+  .p-button {
+    width: 100%;
+  }
+}

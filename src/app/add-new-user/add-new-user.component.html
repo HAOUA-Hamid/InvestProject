@@ -1,0 +1,19 @@
+<p-card header="Add New User">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="name">Name</label>
+      <input id="name" type="text" pInputText [(ngModel)]="newUser.name" required>
+    </div>
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText [(ngModel)]="newUser.email" required>
+    </div>
+    <div class="p-field">
+      <label for="role">Role</label>
+      <p-dropdown id="role" [options]="roles" [(ngModel)]="newUser.role" optionLabel="name" optionValue="value" placeholder="Select a role"></p-dropdown>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton type="button" label="Add User" (click)="addUser()" [disabled]="!validateUser()"></button>
+  </ng-template>
+</p-card>

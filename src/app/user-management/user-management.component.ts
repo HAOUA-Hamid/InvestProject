@@ -23,9 +23,8 @@ interface User {
 })
 export class UserManagementComponent implements OnInit {
   users: User[] = [];
-  displayDialog: boolean = false;
-  user: User = {} as User;
-  newUser: boolean = false;
+  displayAddDialog: boolean = false;
+  newUser: User = {} as User;
   roles: any[] = [
     { name: 'Investor', value: 'investor' },
     { name: 'Entrepreneur', value: 'entrepreneur' },
@@ -41,38 +40,17 @@ export class UserManagementComponent implements OnInit {
     ];
   }
 
-  showDialogToAdd() {
-    this.newUser = true;
-    this.user = {} as User;
-    this.displayDialog = true;
+  showAddDialog() {
+    this.newUser = {} as User;
+    this.displayAddDialog = true;
   }
 
-  save() {
-    if (this.newUser) {
-      this.users.push(this.user);
-    } else {
-      // Update existing user
-      const index = this.findSelectedUserIndex();
-      this.users[index] = this.user;
+  addUser() {
+    if (this.newUser.name && this.newUser.email && this.newUser.role) {
+      this.newUser.id = this.users.length + 1;
+      this.users.push(this.newUser);
+      this.displayAddDialog = false;
+      this.newUser = {} as User;
     }
-    this.user = {} as User;
-    this.displayDialog = false;
-  }
-
-  delete() {
-    const index = this.findSelectedUserIndex();
-    this.users = this.users.filter((val, i) => i !== index);
-    this.user = {} as User;
-    this.displayDialog = false;
-  }
-
-  onRowSelect(event: any) {
-    this.newUser = false;
-    this.user = { ...event.data };
-    this.displayDialog = true;
-  }
-
-  findSelectedUserIndex(): number {
-    return this.users.indexOf(this.user);
   }
 }
