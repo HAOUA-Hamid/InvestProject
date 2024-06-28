@@ -1,0 +1,19 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+:host ::ng-deep .p-card {
+  width: 300px;
+}
+
+.p-field {
+  margin-bottom: 1rem;
+}
+
+.p-button {
+  margin-top: 1rem;
+}

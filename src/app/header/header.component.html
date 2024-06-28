@@ -3,6 +3,7 @@
   <p-menubar [model]="items"></p-menubar>
   <div class="user-info">
     <p-avatar [label]="userName.charAt(0)" styleClass="mr-2" size="normal" shape="circle"></p-avatar>
-    <span>{{ userName }} ({{ userRole | titlecase }})</span>
+    <span class="user-name">{{ userName }}</span>
+    <span class="user-role">({{ userRole | titlecase }})</span>
   </div>
 </header>

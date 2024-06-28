@@ -1,0 +1,22 @@
+<div class="signup-container">
+  <p-card header="Sign Up">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Full Name</label>
+        <input id="name" type="text" pInputText [(ngModel)]="name">
+      </div>
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input id="email" type="text" pInputText [(ngModel)]="email">
+      </div>
+      <div class="p-field">
+        <label for="password">Password</label>
+        <input id="password" type="password" pInputText [(ngModel)]="password">
+      </div>
+      <button pButton type="button" label="Sign Up" (click)="signUp()"></button>
+    </div>
+    <div class="mt-3 text-center">
+      <a routerLink="/login">Already have an account? Login</a>
+    </div>
+  </p-card>
+</div>

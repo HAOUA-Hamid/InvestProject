@@ -1,14 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {HeaderComponent} from "./header/header.component";
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterModule, NavigationEnd, Router } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent,FooterComponent],
-  templateUrl: './app.component.html',
+  imports: [CommonModule, RouterOutlet, RouterModule, HeaderComponent, FooterComponent],
+  templateUrl:'app.component.html'
 })
 export class AppComponent {
-  title = 'InvestProject';
+  showHeaderFooter = true;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.showHeaderFooter = !['login', 'signup'].includes(event.urlAfterRedirects.split('/')[1]);
+      }
+    });
+  }
 }
