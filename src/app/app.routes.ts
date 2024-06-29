@@ -8,6 +8,7 @@ import {UserManagementComponent} from "./user-management/user-management.compone
 import {AddNewUserComponent} from "./add-new-user/add-new-user.component"
 import {MyProjectsComponent } from './my-projects/my-projects.component';
 import { MyInvestmentsComponent } from './my-investments/my-investments.component';
+import {ProjectApprovalComponent} from "./project-approval/project-approval.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'user-management', component: UserManagementComponent },
   { path: 'add-new-user', component: AddNewUserComponent },
   { path: 'my-projects', component: MyProjectsComponent },
-  { path: 'my-investments', component: MyInvestmentsComponent }
+  { path: 'my-investments', component: MyInvestmentsComponent },
+  { path: 'project-approval', component: ProjectApprovalComponent }
 ];

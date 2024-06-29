@@ -1,0 +1,12 @@
+:host ::ng-deep {
+  .p-button {
+    margin-right: .5rem;
+  }
+
+  .p-buttonset .p-button {
+    margin-right: 0;
+  }
+  .p-dialog .p-button {
+    margin-right: .5rem;
+  }
+}
