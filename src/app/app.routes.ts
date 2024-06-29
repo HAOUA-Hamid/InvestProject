@@ -9,6 +9,7 @@ import {AddNewUserComponent} from "./add-new-user/add-new-user.component"
 import {MyProjectsComponent } from './my-projects/my-projects.component';
 import { MyInvestmentsComponent } from './my-investments/my-investments.component';
 import {ProjectApprovalComponent} from "./project-approval/project-approval.component";
+import {AnalyticsComponent} from "./analytics/analytics.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,5 +22,6 @@ export const routes: Routes = [
   { path: 'add-new-user', component: AddNewUserComponent },
   { path: 'my-projects', component: MyProjectsComponent },
   { path: 'my-investments', component: MyInvestmentsComponent },
-  { path: 'project-approval', component: ProjectApprovalComponent }
+  { path: 'project-approval', component: ProjectApprovalComponent },
+  { path: 'analytics', component: AnalyticsComponent }
 ];

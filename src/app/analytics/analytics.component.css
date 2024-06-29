@@ -1,0 +1,14 @@
+:host ::ng-deep {
+  .p-card {
+    margin-bottom: 1rem;
+  }
+
+  .p-card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .p-card .p-card-content {
+    padding: 0;
+  }
+}

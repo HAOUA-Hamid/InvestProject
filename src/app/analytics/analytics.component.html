@@ -1,0 +1,76 @@
+<div class="grid">
+  <!-- Overall Statistics -->
+  <div class="col-12 md:col-4">
+    <p-card header="Total Projects">
+      <h2 class="text-center">{{ totalProjects }}</h2>
+    </p-card>
+  </div>
+  <div class="col-12 md:col-4">
+    <p-card header="Total Investors">
+      <h2 class="text-center">{{ totalInvestors }}</h2>
+    </p-card>
+  </div>
+  <div class="col-12 md:col-4">
+    <p-card header="Total Funding">
+      <h2 class="text-center">{{ totalFunding | currency:'USD':'symbol':'1.0-0' }}</h2>
+    </p-card>
+  </div>
+
+  <!-- Project Status Chart -->
+  <div class="col-12 md:col-6">
+    <p-card header="Project Status">
+      <p-chart type="pie" [data]="projectStatusData" [options]="projectStatusOptions"></p-chart>
+    </p-card>
+  </div>
+
+  <!-- Investment Trend Chart -->
+  <div class="col-12 md:col-6">
+    <p-card header="Investment Trend">
+      <p-chart type="line" [data]="investmentTrendData" [options]="investmentTrendOptions"></p-chart>
+    </p-card>
+  </div>
+
+  <!-- Top Projects Table -->
+  <div class="col-12 md:col-6">
+    <p-card header="Top Projects">
+      <p-table [value]="topProjects" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Project Name</th>
+            <th>Funding</th>
+            <th>Investors</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-project>
+          <tr>
+            <td>{{project.name}}</td>
+            <td>{{project.funding | currency:'USD':'symbol':'1.0-0'}}</td>
+            <td>{{project.investors}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+
+  <!-- Top Investors Table -->
+  <div class="col-12 md:col-6">
+    <p-card header="Top Investors">
+      <p-table [value]="topInvestors" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Investor Name</th>
+            <th>Total Invested</th>
+            <th>Projects Invested</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-investor>
+          <tr>
+            <td>{{investor.name}}</td>
+            <td>{{investor.totalInvested | currency:'USD':'symbol':'1.0-0'}}</td>
+            <td>{{investor.projectsInvested}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>
