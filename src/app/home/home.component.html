@@ -21,27 +21,26 @@
     <section class="opportunities p-5">
       <h2 class="text-center text-3xl mb-5">Featured Investment Opportunities</h2>
       <div class="grid">
-        <div class="col-12 md:col-4" *ngFor="let project of featuredProjects">
-          <p-card [header]="project.name" [subheader]="'Funding Goal: $' + project.fundingGoal" styleClass="h-full">
+        <div class="col-12 md:col-4 mb-3" *ngFor="let project of featuredProjects">
+          <p-card styleClass="project-card">
             <ng-template pTemplate="header">
-              <img [src]="project.image" alt="Project Image" class="w-full">
+              <div class="image-container">
+                <img [src]="project.image" [alt]="project.name + ' image'" class="project-image">
+              </div>
             </ng-template>
-            <p>{{ project.description }}</p>
+            <ng-template pTemplate="title">
+              <h3 class="project-title">{{ project.name }}</h3>
+            </ng-template>
+            <ng-template pTemplate="subtitle">
+              <p class="project-subtitle">Funding Goal: ${{ project.fundingGoal | number }}</p>
+            </ng-template>
+            <p class="project-description">{{ project.description }}</p>
             <ng-template pTemplate="footer">
-              <p-button label="Learn More" styleClass="p-button-outlined"></p-button>
+              <p-button label="Learn More" styleClass="p-button-outlined w-full"></p-button>
             </ng-template>
           </p-card>
         </div>
       </div>
     </section>
-
-    <section class="cta text-center p-5 bg-primary">
-      <h2 class="text-3xl mb-4 text-white">Ready to start investing or find funding?</h2>
-      <p-button label="Join InvestProject" styleClass="p-button-raised p-button-rounded" routerLink="/signup"></p-button>
-    </section>
   </main>
-
-  <footer class="text-center p-3 bg-gray-900 text-white">
-    <p>&copy; {{ currentYear }} InvestProject. All rights reserved.</p>
-  </footer>
 </div>

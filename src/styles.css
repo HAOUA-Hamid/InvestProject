@@ -7,3 +7,18 @@ body {
 .container {
   padding: 2rem;
 }
+:root {
+  .p-card {
+    .p-card-body {
+      padding: 1.5rem;
+    }
+
+    .p-card-content {
+      padding: 0;
+    }
+
+    .p-card-footer {
+      padding-top: 1rem;
+    }
+  }
+}

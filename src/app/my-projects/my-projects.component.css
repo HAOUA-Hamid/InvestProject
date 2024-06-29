@@ -1,0 +1,9 @@
+:host ::ng-deep {
+  .p-button {
+    margin-right: .5rem;
+  }
+
+  .p-dialog .p-button {
+    margin-right: .5rem;
+  }
+}
