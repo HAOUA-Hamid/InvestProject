@@ -1,0 +1,15 @@
+:host ::ng-deep {
+  .privacy-policy-card {
+    .p-card-content {
+      h3 {
+        color: #43a047;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+    }
+  }
+}

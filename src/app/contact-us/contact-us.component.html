@@ -1,0 +1,33 @@
+<p-toast></p-toast>
+<p-card header="Contact Us" styleClass="contact-us-card">
+  <div class="contact-info">
+    <h3>Get in Touch</h3>
+    <p>
+      If you have any questions, concerns, or feedback, please feel free to contact us. We are here to help and ensure that your experience with InvestPro is positive and productive.
+    </p>
+    <ul>
+      <li><i class="pi pi-envelope"></i> <strong>Email:</strong> support&#64;investpro.com</li>
+      <li><i class="pi pi-phone"></i> <strong>Phone:</strong> +1 (800) 123-4567</li>
+      <li><i class="pi pi-map-marker"></i> <strong>Address:</strong> 123 Investment Blvd, Suite 100, Cityville, State, 12345</li>
+    </ul>
+  </div>
+
+  <div class="contact-form">
+    <h3>Send us a message</h3>
+    <form (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" pInputText [(ngModel)]="name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" pInputText [(ngModel)]="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" pInputTextarea [(ngModel)]="message" name="message" required rows="5"></textarea>
+      </div>
+      <button pButton type="submit" label="Send Message" icon="pi pi-send" class="p-button-primary"></button>
+    </form>
+  </div>
+</p-card>

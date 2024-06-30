@@ -10,6 +10,10 @@ import {MyProjectsComponent } from './my-projects/my-projects.component';
 import { MyInvestmentsComponent } from './my-investments/my-investments.component';
 import {ProjectApprovalComponent} from "./project-approval/project-approval.component";
 import {AnalyticsComponent} from "./analytics/analytics.component";
+import {AboutUsComponent} from "./about-us/about-us.component";
+import {ContactUsComponent} from "./contact-us/contact-us.component";
+import {TermsOfServiceComponent} from "./terms-of-service/terms-of-service.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,5 +27,9 @@ export const routes: Routes = [
   { path: 'my-projects', component: MyProjectsComponent },
   { path: 'my-investments', component: MyInvestmentsComponent },
   { path: 'project-approval', component: ProjectApprovalComponent },
-  { path: 'analytics', component: AnalyticsComponent }
+  { path: 'analytics', component: AnalyticsComponent },
+  { path: 'about', component: AboutUsComponent },
+  { path: 'contact', component: ContactUsComponent },
+  { path: 'terms', component: TermsOfServiceComponent },
+  { path: 'privacy', component: PrivacyPolicyComponent }
 ];
