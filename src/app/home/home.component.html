@@ -42,5 +42,21 @@
         </div>
       </div>
     </section>
+
+    <section class="crowdfunding-info p-5">
+      <h2 class="text-center text-3xl mb-5">About Crowdfunding</h2>
+      <p-card>
+        <h3 class="text-2xl mb-3">What is Crowdfunding?</h3>
+        <p class="mb-4">{{ crowdfundingInfo.definition }}</p>
+
+        <h3 class="text-2xl mb-3">Who is Crowdfunding For?</h3>
+        <p class="mb-4">{{ crowdfundingInfo.targetAudience }}</p>
+
+        <h3 class="text-2xl mb-3">Advantages of Crowdfunding</h3>
+        <ul class="list-disc pl-5">
+          <li *ngFor="let advantage of crowdfundingInfo.advantages" class="mb-2">{{ advantage }}</li>
+        </ul>
+      </p-card>
+    </section>
   </main>
 </div>

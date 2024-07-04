@@ -1,22 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, MenubarModule, AvatarModule],
+  imports: [CommonModule, RouterModule, MenubarModule, AvatarModule, ButtonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() userRole: 'investor' | 'entrepreneur' | 'admin' = 'entrepreneur';
-  @Input() userName: string = 'User';
+  @Input() userRole: 'investor' | 'entrepreneur' | 'admin' | null = null;
+  @Input() userName: string | null = null;
 
   items: MenuItem[] = [];
+  
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.initializeMenu();
@@ -31,9 +34,28 @@ export class HeaderComponent implements OnInit {
       }
     ];
 
-    const roleSpecificItems: MenuItem[] = this.getRoleSpecificItems();
+    const roleSpecificItems: MenuItem[] = this.userRole ? this.getRoleSpecificItems() : [];
 
-    this.items = [...commonItems, ...roleSpecificItems];
+    const userMenuItem: MenuItem[] = this.userName ? [
+      {
+        label: this.userName,
+        icon: 'pi pi-user',
+        items: [
+          {
+            label: 'Profile',
+            icon: 'pi pi-user-edit',
+            routerLink: ['/profile']
+          },
+          {
+            label: 'Logout',
+            icon: 'pi pi-sign-out',
+            command: () => this.logout()
+          }
+        ]
+      }
+    ] : [];
+
+    this.items = [...commonItems, ...roleSpecificItems, ...userMenuItem];
   }
 
   getRoleSpecificItems(): MenuItem[] {
@@ -85,5 +107,23 @@ export class HeaderComponent implements OnInit {
       default:
         return [];
     }
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
+
+  logout() {
+    
+    console.log('Logging out');
+    // After logout, reset user info and reinitialize menu
+    this.userRole = null;
+    this.userName = null;
+    this.initializeMenu();
+    this.router.navigate(['/login']);
+  }
+
+  isAuthenticated(): boolean {
+    return this.userName !== null && this.userRole !== null;
   }
 }

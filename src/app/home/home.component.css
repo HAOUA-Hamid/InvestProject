@@ -39,5 +39,20 @@
     }
   }
 }
+.crowdfunding-info {
+  .p-card {
+    .p-card-body {
+      .p-card-content {
+        h3 {
+          color: #333;
+          margin-top: 1.5rem;
+        }
 
+        ul {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
 

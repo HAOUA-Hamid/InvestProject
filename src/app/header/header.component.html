@@ -1,9 +1,5 @@
 <header>
-  <div class="logo">InvestHub</div>
-  <p-menubar [model]="items"></p-menubar>
-  <div class="user-info">
-    <p-avatar [label]="userName.charAt(0)" styleClass="mr-2" size="normal" shape="circle"></p-avatar>
-    <span class="user-name">{{ userName }}</span>
-    <span class="user-role">({{ userRole | titlecase }})</span>
-  </div>
+  <div class="logo" (click)="navigateToHome()">InvestProject</div>
+  <p-menubar [model]="items" [autoDisplay]="false" styleClass="responsive-menu">
+  </p-menubar>
 </header>
