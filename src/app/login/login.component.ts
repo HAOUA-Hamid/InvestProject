@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,9 @@ import { CardModule } from 'primeng/card';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  constructor(private router: Router) {}
 
   login() {
-    console.log(this.email, this.password);
+    this.router.navigate(['/home']);
   }
 }

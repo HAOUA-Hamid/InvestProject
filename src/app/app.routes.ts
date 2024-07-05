@@ -14,9 +14,11 @@ import {AboutUsComponent} from "./about-us/about-us.component";
 import {ContactUsComponent} from "./contact-us/contact-us.component";
 import {TermsOfServiceComponent} from "./terms-of-service/terms-of-service.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {ProjectDetailsComponent} from "./project-details/project-details.component";
+import { PaymentComponent } from './payment/payment.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: SignupComponent },
   { path: 'home', component: HomeComponent },
   { path: 'investment-projects', component: InvestmentProjectsComponent },
   { path: 'investment-offers', component: InvestmentOffersComponent },
@@ -31,5 +33,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'terms', component: TermsOfServiceComponent },
-  { path: 'privacy', component: PrivacyPolicyComponent }
+  { path: 'privacy', component: PrivacyPolicyComponent },
+  { path: 'project-details', component: ProjectDetailsComponent},
+  { path: 'payment', component: PaymentComponent }
 ];
