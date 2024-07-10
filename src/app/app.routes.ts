@@ -18,7 +18,7 @@ import {ProjectDetailsComponent} from "./project-details/project-details.compone
 import { PaymentComponent } from './payment/payment.component';
 
 export const routes: Routes = [
-  { path: '', component: SignupComponent },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'investment-projects', component: InvestmentProjectsComponent },
   { path: 'investment-offers', component: InvestmentOffersComponent },
@@ -34,6 +34,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactUsComponent },
   { path: 'terms', component: TermsOfServiceComponent },
   { path: 'privacy', component: PrivacyPolicyComponent },
-  { path: 'project-details', component: ProjectDetailsComponent},
+  { path: 'project-details/:id', component: ProjectDetailsComponent},
   { path: 'payment', component: PaymentComponent }
 ];

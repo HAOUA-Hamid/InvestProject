@@ -1,35 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-project-details',
   standalone: true,
-  imports: [CommonModule, RouterModule,ButtonModule,CardModule],
+  imports: [CommonModule, RouterModule, ButtonModule, CardModule],
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.css']
 })
-export class ProjectDetailsComponent {
-  project = {
-    name: 'AI-Driven Healthcare',
-    description: 'Machine learning algorithms for early disease detection.',
-    fundingGoal: 1000000,
-    image: '002.jpg',  // Assuming you place the image in the assets folder
-    features: [
-      'Early detection of chronic diseases',
-      'Personalized treatment plans',
-      'Cost-effective healthcare solutions'
-    ],
-    marketImpact: 'AI-Driven Healthcare aims to revolutionize the healthcare industry by providing early and accurate disease detection, leading to better patient outcomes and reduced healthcare costs.',
-    team: [
-      { name: 'Dr. John Doe', role: 'Chief Medical Officer', bio: 'Expert in medical AI with 20 years of experience.' },
-      { name: 'Jane Smith', role: 'Lead Data Scientist', bio: 'Data science specialist with a focus on healthcare applications.' }
-    ]
-  };
+export class ProjectDetailsComponent implements OnInit {
+  project: any;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private projectService: ProjectService
+  ) {}
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const projectId = +params['id']; // Convert to number
+      this.loadProject(projectId);
+    });
+  }
+
+  loadProject(id: number) {
+    this.projectService.getProjectById(id).subscribe(
+      (project) => {
+        this.project = project;
+      },
+      (error) => {
+        console.error('Error fetching project:', error);
+      }
+    );
+  }
 
   goToPayment() {
     this.router.navigate(['/payment']);

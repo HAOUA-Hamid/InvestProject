@@ -10,13 +10,14 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { ProjectService } from '../../services/project.service';
 
 interface Project {
   id: number;
-  name: string;
+  title: string;
   description: string;
-  fundingGoal: number;
-  image: string;
+  investorCount: number;
+  photoUrls: string[];
 }
 
 @Component({
@@ -46,15 +47,24 @@ export class MyProjectsComponent implements OnInit {
 
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit() {
-    this.projects = [
-      { id: 1, name: 'Green Energy Solutions', description: 'Innovative solar panel technology for residential areas.', fundingGoal: 500000, image: '001.jpg' },
-      { id: 2, name: 'AI-Driven Healthcare', description: 'Machine learning algorithms for early disease detection.', fundingGoal: 1000000, image: '002.jpg' },
-      { id: 3, name: 'Sustainable Agriculture', description: 'Vertical farming solutions for urban environments.', fundingGoal: 750000, image: '003.jpg' }
-    ];
+    this.loadProjects();
+  }
+
+  loadProjects() {
+    this.projectService.getProjects().subscribe(
+      (data) => {
+        this.projects = data;
+      },
+      (error) => {
+        console.error('Error fetching projects:', error);
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Failed to load projects', life: 3000});
+      }
+    );
   }
 
   openNew() {
@@ -65,12 +75,20 @@ export class MyProjectsComponent implements OnInit {
 
   deleteProject(project: Project) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + project.name + '?',
+      message: 'Are you sure you want to delete ' + project.title + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.projects = this.projects.filter(p => p.id !== project.id);
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Project Deleted', life: 3000});
+        this.projectService.deleteProject(project.id).subscribe(
+          () => {
+            this.projects = this.projects.filter(p => p.id !== project.id);
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Project Deleted', life: 3000});
+          },
+          (error) => {
+            console.error('Error deleting project:', error);
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Failed to delete project', life: 3000});
+          }
+        );
       }
     });
   }
@@ -88,32 +106,35 @@ export class MyProjectsComponent implements OnInit {
   saveProject() {
     this.submitted = true;
 
-    if (this.project.name?.trim()) {
+    if (this.project.title?.trim()) {
       if (this.project.id) {
-        const index = this.projects.findIndex(p => p.id === this.project.id);
-        this.projects[index] = this.project;
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Project Updated', life: 3000});
+        this.projectService.updateProject(this.project).subscribe(
+          (updatedProject) => {
+            const index = this.projects.findIndex(p => p.id === updatedProject.id);
+            this.projects[index] = updatedProject;
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Project Updated', life: 3000});
+            this.projectDialog = false;
+            this.project = {} as Project;
+          },
+          (error) => {
+            console.error('Error updating project:', error);
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Failed to update project', life: 3000});
+          }
+        );
+      } else {
+        this.projectService.createProject(this.project).subscribe(
+          (newProject) => {
+            this.projects.push(newProject);
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Project Created', life: 3000});
+            this.projectDialog = false;
+            this.project = {} as Project;
+          },
+          (error) => {
+            console.error('Error creating project:', error);
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Failed to create project', life: 3000});
+          }
+        );
       }
-      else {
-        this.project.id = this.createId();
-        this.project.image = 'project-placeholder.png';
-        this.projects.push(this.project);
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Project Created', life: 3000});
-      }
-
-      this.projects = [...this.projects];
-      this.projectDialog = false;
-      this.project = {} as Project;
     }
-  }
-
-  createId(): number {
-    let id = 0;
-    for (var i = 0; i < this.projects.length; i++) {
-      if (this.projects[i].id > id) {
-        id = this.projects[i].id;
-      }
-    }
-    return id + 1;
   }
 }

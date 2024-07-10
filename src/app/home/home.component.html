@@ -25,18 +25,18 @@
           <p-card styleClass="project-card">
             <ng-template pTemplate="header">
               <div class="image-container">
-                <img [src]="project.image" [alt]="project.name + ' image'" class="project-image">
+                <img [src]="project.photoUrls[0]" [alt]="project.title + ' image'" class="project-image">
               </div>
             </ng-template>
             <ng-template pTemplate="title">
-              <h3 class="project-title">{{ project.name }}</h3>
+              <h3 class="project-title">{{ project.title }}</h3>
             </ng-template>
             <ng-template pTemplate="subtitle">
-              <p class="project-subtitle">Funding Goal: ${{ project.fundingGoal | number }}</p>
+              <p class="project-subtitle">Investors: {{ project.investorCount }}</p>
             </ng-template>
             <p class="project-description">{{ project.description }}</p>
             <ng-template pTemplate="footer">
-              <p-button label="Learn More" styleClass="p-button-outlined w-full" routerLink="/project-details"></p-button>
+              <p-button label="Learn More" styleClass="p-button-outlined w-full" [routerLink]="['/project-details', project.id]"></p-button>
             </ng-template>
           </p-card>
         </div>

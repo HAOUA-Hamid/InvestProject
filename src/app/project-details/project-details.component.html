@@ -1,24 +1,13 @@
-<div class="p-card">
-    <div class="p-card-header">
-      <img [src]="project.image" alt="Project Image" class="project-image" />
-    </div>
-    <div class="p-card-body">
-      <h2>{{ project.name }}</h2>
-      <p>{{ project.description }}</p>
-      <p><strong>Funding Goal:</strong> {{ project.fundingGoal | currency }}</p>
-      <h3>Key Features</h3>
-      <ul>
-        <li *ngFor="let feature of project.features">{{ feature }}</li>
-      </ul>
-      <h3>Market Impact</h3>
-      <p>{{ project.marketImpact }}</p>
-      <h3>Meet the Team</h3>
-      <div *ngFor="let member of project.team" class="team-member">
-        <h4>{{ member.name }}</h4>
-        <p><strong>{{ member.role }}</strong></p>
-        <p>{{ member.bio }}</p>
-      </div>
-      <button pButton type="button" label="Invest" icon="pi pi-money-bill" (click)="goToPayment()"></button>
-    </div>
+<div class="p-card" *ngIf="project">
+  <div class="p-card-header">
+    <img [src]="project.photoUrls[0]" alt="Project Image" class="project-image" />
   </div>
-  
+  <div class="p-card-body">
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.description }}</p>
+    <p><strong>Investors:</strong> {{ project.investorCount }}</p>
+    <h3>Project Owner</h3>
+    <p>{{ project.projectOwner.username }}</p>
+    <button pButton type="button" label="Invest" icon="pi pi-money-bill" (click)="goToPayment()"></button>
+  </div>
+</div>

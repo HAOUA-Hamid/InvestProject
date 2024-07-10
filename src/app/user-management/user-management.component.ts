@@ -6,18 +6,21 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { UserService } from '../../services/user.service';
 
 interface User {
   id: number;
-  name: string;
+  username: string;
   email: string;
-  role: string;
+  password: string;
+  phoneNumber: string;
 }
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule, TableModule, ButtonModule, DialogModule, InputTextModule, DropdownModule, FormsModule],
+  imports: [CommonModule, TableModule, ButtonModule, DialogModule, InputTextModule, DropdownModule, FormsModule, HttpClientModule],
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
@@ -31,13 +34,16 @@ export class UserManagementComponent implements OnInit {
     { name: 'Admin', value: 'admin' }
   ];
 
+  constructor(private userService: UserService) {}
+
   ngOnInit() {
-    // In a real application, you would fetch users from a service
-    this.users = [
-      { id: 1, name: 'John Doe', email: 'john@example.com', role: 'investor' },
-      { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'entrepreneur' },
-      { id: 3, name: 'Admin User', email: 'admin@example.com', role: 'admin' }
-    ];
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
+    this.userService.getUsers().subscribe((users) => {
+      this.users = users;
+    });
   }
 
   showAddDialog() {
@@ -46,11 +52,12 @@ export class UserManagementComponent implements OnInit {
   }
 
   addUser() {
-    if (this.newUser.name && this.newUser.email && this.newUser.role) {
-      this.newUser.id = this.users.length + 1;
-      this.users.push(this.newUser);
-      this.displayAddDialog = false;
-      this.newUser = {} as User;
+    if (this.newUser.username && this.newUser.email && this.newUser.phoneNumber && this.newUser.password) {
+      this.userService.addUser(this.newUser).subscribe((user) => {
+        this.users.push(user);
+        this.displayAddDialog = false;
+        this.newUser = {} as User;
+      });
     }
   }
 }

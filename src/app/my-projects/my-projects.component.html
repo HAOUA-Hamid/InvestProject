@@ -9,17 +9,17 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>Name</th>
+        <th>Title</th>
         <th>Description</th>
-        <th>Funding Goal</th>
+        <th>Investor Count</th>
         <th>Action</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-project>
       <tr>
-        <td>{{project.name}}</td>
+        <td>{{project.title}}</td>
         <td>{{project.description}}</td>
-        <td>{{project.fundingGoal | currency:'USD':'symbol':'1.0-0'}}</td>
+        <td>{{project.investorCount}}</td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProject(project)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProject(project)"></button>
@@ -32,17 +32,13 @@
 <p-dialog [(visible)]="projectDialog" [style]="{width: '450px'}" header="Project Details" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <div class="field">
-      <label for="name">Name</label>
-      <input type="text" pInputText id="name" [(ngModel)]="project.name" required autofocus />
-      <small class="p-error" *ngIf="submitted && !project.name">Name is required.</small>
+      <label for="title">Title</label>
+      <input type="text" pInputText id="title" [(ngModel)]="project.title" required autofocus />
+      <small class="p-error" *ngIf="submitted && !project.title">Title is required.</small>
     </div>
     <div class="field">
       <label for="description">Description</label>
       <textarea id="description" pInputTextarea [(ngModel)]="project.description" required rows="3" cols="20"></textarea>
-    </div>
-    <div class="field">
-      <label for="fundingGoal">Funding Goal</label>
-      <p-inputNumber id="fundingGoal" [(ngModel)]="project.fundingGoal" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
     </div>
   </ng-template>
 
