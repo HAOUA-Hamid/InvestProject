@@ -12,12 +12,22 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ProjectService } from '../../services/project.service';
 
-interface Project {
+interface User {
   id: number;
+  username: string;
+  email: string;
+  phoneNumber: string;
+  isVerified: boolean;
+  trustPercentage: number;
+}
+
+interface Project {
+  id?: number;
   title: string;
   description: string;
-  investorCount: number;
   photoUrls: string[];
+  projectOwner: User;
+  investorCount: number;
 }
 
 @Component({
@@ -68,7 +78,20 @@ export class MyProjectsComponent implements OnInit {
   }
 
   openNew() {
-    this.project = {} as Project;
+    this.project = {
+      title: '',
+      description: '',
+      photoUrls: [],
+      projectOwner: {
+        id: 1,
+        username: '',
+        email: '',
+        phoneNumber: '',
+        isVerified: false,
+        trustPercentage: 0
+      },
+      investorCount: 0
+    };
     this.submitted = false;
     this.projectDialog = true;
   }
@@ -79,7 +102,7 @@ export class MyProjectsComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.projectService.deleteProject(project.id).subscribe(
+        this.projectService.deleteProject(project.id!).subscribe(
           () => {
             this.projects = this.projects.filter(p => p.id !== project.id);
             this.messageService.add({severity:'success', summary: 'Successful', detail: 'Project Deleted', life: 3000});
