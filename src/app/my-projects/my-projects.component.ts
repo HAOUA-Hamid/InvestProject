@@ -101,6 +101,7 @@ export class MyProjectsComponent implements OnInit {
   hideDialog() {
     this.projectDialog = false;
     this.submitted = false;
+    this.project = {} as Project;
   }
 
   saveProject() {
